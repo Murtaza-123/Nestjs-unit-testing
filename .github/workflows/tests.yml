@@ -1,14 +1,19 @@
 name: Tests
+
 on: [push]
+
 jobs:
   build:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: stefanoeb/eslint-action@1.0.2
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
       with:
-       files: src/
+        node-version: '14'
     - name: Install modules
       run: npm ci
+    - name: Run ESLint
+      run: npx eslint src/
     - name: Run tests
       run: npm run test
