@@ -10,5 +10,7 @@ jobs:
        files: src/
     - name: Install modules
       run: npm ci
+    - name: Run ESLint
+      run: eslint . --ext .js,.jsx,.ts,.tsx
     - name: Run tests
       run: npm run test

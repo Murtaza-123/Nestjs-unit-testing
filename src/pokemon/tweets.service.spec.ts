@@ -9,8 +9,7 @@ import { DeepMocked, createMock } from "@golevelup/ts-jest";
 
 describe("PokemonService", () => {
   let pokemonService: PokemonService;
-  let httpService:   DeepMocked<HttpService>
-
+  let httpService: DeepMocked<HttpService>;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [PokemonService],
