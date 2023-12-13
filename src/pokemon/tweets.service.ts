@@ -11,7 +11,7 @@ export class PokemonService {
 
   async getPokemon(id: number) {
     if (id < 1 || id > 151) {
-      throw new BadRequestException(`Invalid Pokemon ID`);
+      throw new BadRequestException('Invalid Pokemon ID');
     }
 
     const { data } = await this.httpService.axiosRef({

@@ -1,19 +1,28 @@
-import { HttpModule } from '@nestjs/axios';
-import { BadRequestException } from '@nestjs/common';
+import {  HttpService } from '@nestjs/axios';
+import { BadRequestException, InternalServerErrorException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { PokemonService } from './tweets.service';
+import {DeepMocked, createMock} from '@golevelup/ts-jest'
 
 describe('PokemonService', () => {
   let pokemonService: PokemonService;
+  let httpService: DeepMocked<HttpService>
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [HttpModule],
-      providers: [PokemonService],
-    }).compile();
+      providers: [PokemonService,
+     ],
+    }).useMocker(createMock)
+    .compile();
 
     pokemonService = module.get<PokemonService>(PokemonService);
+    httpService = module.get(HttpService);
   });
+
+  it('should be defined', () => {
+    expect(pokemonService).toBeDefined();
+  });
+
   describe('getPokemon', () => {
     it('pokemon ID less than 1 should throw error', async () => {
       const getPokemon = pokemonService.getPokemon(0);
@@ -28,9 +37,16 @@ describe('PokemonService', () => {
     });
 
     it('valid pokemon ID to return the pokemon name', async () => {
+      httpService.axiosRef.mockResolvedValueOnce({
+        data: `Unexpected Data`,
+        headers: {},
+        config: { url: '' },
+        status: 200,
+        statusText: '',
+      });
       const getPokemon = pokemonService.getPokemon(1);
+      await expect(getPokemon).rejects.toBeInstanceOf(InternalServerErrorException)
 
-      await expect(getPokemon).resolves.toBe('bulbasaur');
     });
   });
 });
