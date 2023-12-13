@@ -1,16 +1,24 @@
 name: Tests
-on: [push]
+
+on:
+  push:
+  
 jobs:
   build:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-node@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
       with:
-       files: src/
+        node-version: v20.10.0 # or specify the Node.js version you need
+
     - name: Install modules
       run: npm ci
+
     - name: Run ESLint
       run: eslint . --ext .js,.jsx,.ts,.tsx
+
     - name: Run tests
       run: npm run test
