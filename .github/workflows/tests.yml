@@ -14,6 +14,6 @@ jobs:
     - name: Install modules
       run: npm ci
     - name: Run ESLint
-      run: npx eslint src/
+      run: npx eslint src/ --ext .js,.jsx,.ts,.tsx --format=node_modules/eslint/lib/cli-engine/formatters/stylish.js
     - name: Run tests
       run: npm run test
