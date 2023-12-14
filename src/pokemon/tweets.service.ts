@@ -20,7 +20,7 @@ export class PokemonService {
     });
 
     if (!data || !data.species || !data.species.name) {
-      throw new    InternalServerErrorException();
+      throw new     InternalServerErrorException();
     }
 
     return data.species.name;

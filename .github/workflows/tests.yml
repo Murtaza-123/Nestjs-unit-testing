@@ -21,7 +21,10 @@ jobs:
       run: npm install eslint
 
     - name: Run ESLint
-      run: npx eslint . --ext .js,.jsx,.ts,.tsx --fix --max-warnings 0 #see the eslint errors
+      run: npx eslint .
+        --config .eslintrc.json
+        --ext .js,.jsx,.ts,.tsx
+      continue-on-error: false
 
     - name: Run tests
       run: npm run test
