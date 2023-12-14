@@ -12,10 +12,10 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '14'  # or specify the Node.js version you need
+        node-version: '14'
 
     - name: Install modules
-      run: npm ci
+      run: npm install
 
     - name: Run ESLint
       run: eslint . --ext .js,.jsx,.ts,.tsx
