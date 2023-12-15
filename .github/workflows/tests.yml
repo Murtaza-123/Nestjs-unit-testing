@@ -43,7 +43,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           ghToken: ${{ secrets.GITHUB_TOKEN }}
-          eslintFiles: "/src"
+          eslintFiles: .
           #eslintConfig: ".eslintrc"
           eslintExt: "ts, tsx"
 
