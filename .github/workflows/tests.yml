@@ -26,24 +26,7 @@
 #     - name: Run tests
 #       run: npm run test
 
-# name: Lint
-# on: [push]
 
-# jobs:
-#   eslint_check:
-#     name: Prepare action
-#     runs-on: macos-latest
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
-
-#       - name: Lint
-#         uses: actions/setup-node@v4
-#         with:
-#           ghToken: ${{ secrets.GITHUB_TOKEN }}
-#           eslintFiles: "/src"
-#           eslintConfig: ".eslintrc"
-#           eslintExt: "ts, tsx"
 
 name: Lint
 on: [push]
@@ -56,14 +39,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
+      - name: Lint
         uses: actions/setup-node@v4
         with:
-          node-version: '16'  # Adjust the version as needed
+          ghToken: ${{ secrets.GITHUB_TOKEN }}
+          eslintFiles: "/src"
+          #eslintConfig: ".eslintrc"
+          eslintExt: "ts, tsx"
 
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Lint
-        run: npx eslint "/src" --config "./.eslintrc" --ext "ts,tsx"
     
