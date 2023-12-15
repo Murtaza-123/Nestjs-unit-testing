@@ -7,21 +7,31 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v3
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
+       # Checkout action must run prior to eslint check
+    - name: Checkout 
+      uses: actions/checkout@v1
+    - name: Lint
+      uses: Krizzu/eslint-check-action@v1.1.0
       with:
-        node-version: '16'
+         ghToken: ${{ secrets.GITHUB_TOKEN }}
+         eslintFiles: "lib, scripts"
+         eslintConfig: "myConfigs/eslint.config.js"
+         eslintExt: "ts, tsx"
+    # - uses: actions/checkout@v3
 
-    - name: Install modules
-      run: npm install
+    # - name: Setup Node.js
+    #   uses: actions/setup-node@v4
+    #   with:
+    #     node-version: '16'
+
+    # - name: Install modules
+    #   run: npm install
 
     # - name: Install ESLint
     #   run: npm install eslint
 
-    - name: Run ESLint
-      run: npx eslint . --ext .js,.jsx,.ts,.tsx
+    # - name: Run ESLint
+    #   run: npx eslint . --ext .js,.jsx,.ts,.tsx
 
     - name: Run tests
       run: npm run test
