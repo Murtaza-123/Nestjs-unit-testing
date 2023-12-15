@@ -17,9 +17,6 @@ jobs:
     - name: Install modules
       run: npm install
 
-    # - name: Install ESLint
-    #   run: npm install eslint
-
     - name: Run ESLint
       run: npx eslint . --ext .js,.jsx,.ts,.tsx
 
@@ -27,24 +24,3 @@ jobs:
       run: npm run test
 
 
-
-# name: Lint
-# on: [push]
-
-# jobs:
-#   eslint_check:
-#     name: Prepare action
-#     runs-on: macos-latest
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
-
-#       - name: Lint
-#         uses: actions/setup-node@v4
-#         with:
-#           ghToken: ${{ secrets.GITHUB_TOKEN }}
-#           eslintFiles: .
-#           #eslintConfig: ".eslintrc"
-#           eslintExt: "ts, tsx"
-
-    
