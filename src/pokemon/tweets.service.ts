@@ -1,9 +1,9 @@
-import { HttpService } from '@nestjs/axios';
+import { HttpService } from "@nestjs/axios";
 import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
-} from '@nestjs/common';
+} from "@nestjs/common";
 
 @Injectable()
 export class PokemonService {
@@ -11,7 +11,7 @@ export class PokemonService {
 
   async getPokemon(id: number) {
     if (id < 1 || id > 151) {
-      throw new BadRequestException(`Invalid Pokemon ID`);
+      throw new BadRequestException("Invalid Pokemon ID")
     }
 
     const { data } = await this.httpService.axiosRef({
@@ -20,10 +20,9 @@ export class PokemonService {
     });
 
     if (!data || !data.species || !data.species.name) {
-      throw new InternalServerErrorException();
+      throw new    InternalServerErrorException();
     }
 
     return data.species.name;
   }
 }
-
